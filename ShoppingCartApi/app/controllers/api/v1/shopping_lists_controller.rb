@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Api::V1::ShoppingListsController < ApplicationController
-  before_action :set_shopping_list, only: [:show, :update, :destroy]
+  before_action :set_shopping_list, only: %i[show update destroy]
 
   # GET /shopping_lists
   def index
@@ -44,17 +46,15 @@ class Api::V1::ShoppingListsController < ApplicationController
     "#{@request.path}/#{shopping_list.slug}"
   end
 
-
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_shopping_list
-      @shopping_list = ShoppingList.friendly.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def shopping_list_params
-      params.require(:shopping_list).permit(:title, :slug)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_shopping_list
+    @shopping_list = ShoppingList.friendly.find(params[:id])
+  end
 
-
+  # Only allow a trusted parameter "white list" through.
+  def shopping_list_params
+    params.require(:shopping_list).permit(:title, :slug)
+  end
 end
