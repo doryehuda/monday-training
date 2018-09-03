@@ -5,10 +5,9 @@ import ItemDetails from "../item-details/item-details";
 
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
 class ShoppingCart extends Component {
-
   render() {
     return (
       <div className="Shopping-cart">
@@ -19,7 +18,16 @@ class ShoppingCart extends Component {
           />
         </div>
         <div className="Shopping-cart-itemDetails">
-          <Route path={`${this.props.match.url}/:id`} component={ItemDetails} />
+          <Switch>
+            <Route
+              path={`${this.props.match.url}/new`}
+              component={ItemDetails}
+            />
+            <Route
+              path={`${this.props.match.url}/:id`}
+              component={ItemDetails}
+            />
+          </Switch>
         </div>
       </div>
     );
