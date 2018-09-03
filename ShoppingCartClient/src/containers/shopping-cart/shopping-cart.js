@@ -1,24 +1,39 @@
 import React, { Component } from "react";
 import "./shopping-cart.css";
 import ItemsList from "../../components/items-list/items-list";
-import ItemDetails from "../../components/item-details/item-details";
+import ItemDetails from "../item-details/item-details";
+
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { Route } from "react-router-dom";
+
 class ShoppingCart extends Component {
-  itemSubmitted(item){
-    console.log(item);
-  }
+
   render() {
-    let items = [1, 2, 3, 4, 5, 6];
     return (
       <div className="Shopping-cart">
         <div className="Shopping-cart-itemsList">
-          <ItemsList items={items} />
+          <ItemsList
+            items={this.props.carts}
+            onItemSelected={this.handleItemSelected}
+          />
         </div>
         <div className="Shopping-cart-itemDetails">
-          <ItemDetails onSubmit={this.itemSubmitted} />
+          <Route path={`${this.props.match.url}/:id`} component={ItemDetails} />
         </div>
       </div>
     );
   }
 }
 
-export default ShoppingCart;
+ShoppingCart.propTypes = {
+  carts: PropTypes.array.isRequired
+};
+
+function mapStateToProps(state, ownProps) {
+  return {
+    carts: state.carts
+  };
+}
+
+export default connect(mapStateToProps)(ShoppingCart);

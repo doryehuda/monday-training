@@ -1,7 +1,8 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import logo from "./logo.svg";
 import "./App.css";
-import ShoppingCart from "./containers/shopping-cart/shopping-cart";
+import { Link } from 'react-router-dom'
 
 class App extends Component {
   render() {
@@ -10,14 +11,27 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
+          <nav>
+            <Link to="/">
+              Home
+            </Link>
+            {" | "}
+            <Link to="/shopping-cart">
+              Shopping Cart
+            </Link>
+          </nav>
         </header>
-
-        <div className="App-content">
-          <ShoppingCart />
-        </div>
+        {this.props.routes}
       </div>
     );
   }
 }
+App.propTypes = {
+  routes: PropTypes.object.isRequired
+};
 
 export default App;
+
+// <div className="App-content">
+//   <ShoppingCart />
+// </div>

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-
+import './item-row.css'
 class ItemRow extends Component {
   render() {
     return (
-      <div>
-        {this.props.item}
+      <div className="Item-row">
+        {this.props.item.title}
       </div>
     );
   }
