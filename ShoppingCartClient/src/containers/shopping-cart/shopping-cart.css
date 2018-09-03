@@ -1,5 +1,16 @@
-.shopping-cart{
-    background-color: chocolate;
-    height: 100%;
+.Shopping-cart{
     width: 100%;
+}
+.Shopping-cart {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.Shopping-cart-itemsList {
+  flex: 2 2 auto;
+}
+
+.Shopping-cart-itemDetails {
+  flex: 1 1 auto;
 }
