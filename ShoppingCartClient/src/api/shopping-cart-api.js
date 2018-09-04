@@ -12,7 +12,7 @@ class ShoppingCartApi {
         return response.json();
       })
       .catch(error => {
-        return error;
+        throw error; //pass the error to the listener
       });
   }
   static getAllCarts() {

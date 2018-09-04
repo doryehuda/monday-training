@@ -25,7 +25,7 @@ export function updateCart(cart) {
         dispatch(updateCartSuccess(responseCart));
       })
       .catch(error => {
-        throw error;
+        console.error(error);
       });
   };
 }
@@ -59,7 +59,7 @@ export function deleteCart(cart) {
         dispatch(deleteCartSuccess(cart));
       })
       .catch(error => {
-        throw error;
+        console.error(error);
       });
   };
 }
