@@ -3,16 +3,23 @@ import PropTypes from "prop-types";
 class ItemForm extends Component {
   constructor(props) {
     super(props);
+    let titleValue = props.item ? props.item.title : "";
+
     this.state = {
-      title: "",
+      id: props.item.id,
+      title: titleValue,
       titleValid: false,
-      formValid: false
+      formValid: false,
+      isChanged: false
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
   }
 
+  componentWillMount() {
+    this.validateField("title", this.state.title);
+  }
   componentWillReceiveProps(nextProps) {
     if (nextProps.item.id !== this.state.id) {
       let titleValue = nextProps.item ? nextProps.item.title : "";
@@ -21,7 +28,8 @@ class ItemForm extends Component {
           id: nextProps.item.id,
           title: titleValue,
           titleValid: false,
-          formValid: false
+          formValid: false,
+          isChanged: false
         },
         () => {
           this.validateField("title", titleValue);
@@ -37,7 +45,8 @@ class ItemForm extends Component {
 
     this.setState(
       {
-        [name]: value
+        [name]: value,
+        isChanged: true
       },
       () => {
         this.validateField(name, value);
@@ -69,7 +78,7 @@ class ItemForm extends Component {
 
   validateForm() {
     this.setState({
-      formValid: this.state.titleValid
+      formValid: this.state.titleValid && this.state.isChanged
     });
   }
   handleSubmit(event) {
@@ -82,7 +91,10 @@ class ItemForm extends Component {
 
   handleDelete(event) {
     event.preventDefault();
-    this.props.onDelete(this.state.id);
+    this.props.onDelete({
+      id: this.state.id,
+      title: this.state.title
+    });
   }
   renderDeleteButton() {
     return (

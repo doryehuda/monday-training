@@ -6,16 +6,22 @@ import ItemDetails from "../item-details/item-details";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Switch, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class ShoppingCart extends Component {
   render() {
     return (
       <div className="Shopping-cart">
-        <div className="Shopping-cart-itemsList">
-          <ItemsList
-            items={this.props.carts}
-            onItemSelected={this.handleItemSelected}
-          />
+        <div className="Shopping-cart-itemsArea">
+          <Link to={`${this.props.match.url}/new`}>
+            <button className="btn btn-primary Shopping-cart-new">New</button>
+          </Link>
+          <div className="Shopping-cart-itemsList">
+            <ItemsList
+              items={this.props.carts}
+              onItemSelected={this.handleItemSelected}
+            />
+          </div>
         </div>
         <div className="Shopping-cart-itemDetails">
           <Switch>

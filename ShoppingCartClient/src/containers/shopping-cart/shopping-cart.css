@@ -6,11 +6,18 @@
   flex-direction: row;
   height: 100%;
 }
-
+.Shopping-cart-new a{
+  color: white;
+}
 .Shopping-cart-itemsList {
-  flex: 2 2 auto;
 }
 
 .Shopping-cart-itemDetails {
-  flex: 1 1 auto;
+  flex: 2 2 100%;
+}
+.Shopping-cart-itemsArea{
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 100%;
+
 }
